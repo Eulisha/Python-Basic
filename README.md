@@ -70,7 +70,7 @@ except RuntimeError:
   # 不能直接取！會噴object is not subscriptable！
   print(thisdict.values()[0])
   
-  # 要像這樣自己跑迴圈轉乘可以用的array才行
+  # 要像這樣自己跑迴圈轉成可以用的array才行
   assignment_array = []
     for value in assignment.values(): 
     assignment_array.append(value)
@@ -141,7 +141,7 @@ except RuntimeError:
       - 小寫: `字串.lower()` 
       
   - Boolean 布林: `bool`
-    值為大寫的`True`或`False`，`
+    值為大寫的`True`或`False`
     Falsy value有：`0`、`None`、`''`、`()`、`[]`、`{}`
    
   - List 清單: `清單名 = [物件1, 物件2]`
@@ -149,7 +149,7 @@ except RuntimeError:
     - 長度： `len()`，適用於string或array
     - 新增物件：增加物件在最後 `list名稱.append(物件)`
     - 新增物件於指定位置：將增加物件加在指定index之前 `list名稱.insert(index,物件)`
-    - 新增物件組：將物件組加在最後 `list名稱.exend(物件組)`，也可以加入tuple
+    - 新增物件組：將物件組加在最後 `list名稱.exend(清單)`，也可以加入tuple
     - 刪除指定物件： `list名稱.remove(物件)`
     - 刪除指定index： `list名稱.pop(index)` 如果沒有指定index則會刪除最後一個
     - 刪除大絕：`del list名稱[index]` 如果沒有指定index則會刪除整個array
@@ -158,12 +158,12 @@ except RuntimeError:
     - 呼叫： `字典名["key名稱"]`
     - 新增或更新值：`字典名[key名]=值`  
     - 新增或更新物件：`字典1.update(字典2)`
-    - 刪除：`字典名.pop("key名")`
-    - 刪除最後一個：`字典名.popitem("key")`
+    - 刪除指定物件：`字典名.pop("key名")`
+    - 刪除最後一個被存進去的物件：`字典名.popitem()`
     - 刪除大絕： `del 字典名["key名"]` 如果沒有指定key則會刪除整個
     - 刪除所有物件：`字典名.clear()`
-    - 取dict內容: `dic名稱.items()` 、`dic名稱.keys()`、`dic名稱.values()` ，注意需要跑loop才能取出來
-  - Tuple 元組: 序列、不可更變 `(物件,物件)` #從def回傳多個值時為tuple型態
+    - 取dict內容: `dic名稱.items()` 、`dic名稱.keys()`、`dic名稱.values()`，注意需要跑loop才能取出來
+  - Tuple 元組: 序列、不可更變 `(物件,物件)`，從def回傳多個值時為tuple型態
   - Set: 非序列、不可更變、不允許重複
   #### 型態取得與轉換
   - 取得型態: `type(變數)`
@@ -186,8 +186,8 @@ except RuntimeError:
     
   - 一次命名多個變數
   ```python
-  python_king, algo_king, king_of_all = '小林','Jimmy','Kelvin'
-  python_king = algo_king = C++_king = 'Kelvin'
+  student1, student2, student3 = '小林','Jimmy','Kelvin'
+  student = programmer = 'Kelvin'
   ```
   
   - 變數可以直接被覆蓋
@@ -368,12 +368,12 @@ def seminar(*students):
     print(student)
 seminar('Euli','Tim','Adam')
 ```
-- key-value方式傳參數： `def名(key1=value1,key2=value2)`
+- 可以用key-value方式傳參數： `def名(key1=value1,key2=value2)`
 - 而且可以用`**`如果不知道有幾個
 ```python
 def seminar(**student):
-    print(student['Euli'])
+    print(student['stu1'])
 seminar(stu1 = 'Euli',stu2 = 'Tim',stu3 = 'Adam')
 ```
-- 也可以用default vlaue: `def 名稱(變數 = 值)`
+- 也可以用default value: `def 名稱(變數 = 值)`
 - 可以將def傳入def：`def名(def名)`

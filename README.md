@@ -12,7 +12,7 @@
   - [變數](#變數)
     - [基本篇](#基本篇)
     - [全域變數 與 區域變數](#全域變數-與-區域變數)
-    - [Call by value, refernce, sharing, or ??](#Call by value, refernce, sharing, or ??)
+    - [Call by value, refernce, sharing, or ??](#Call-by-value,-refernce,-sharing,-or-??)
   - [運算子](#運算子)
   - [排序](#排序)
   - [錯誤處理](#錯誤處理)

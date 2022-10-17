@@ -1,21 +1,41 @@
 # Python-Basic
+本文是給從Javascript想快速入門Python用的介紹
 
 ## Table of Content
-[型態、變數、運算子、型態轉換](#型態、變數、運算子、型態轉換)
-[計算類語法](#計算類語法)
-[尋找取代](#尋找取代)
-[轉換](#轉換)
-[排序](#排序)
-[處理異常語法](#處理異常語法)
-[系統功能](#系統功能)
-[流程控制(if/for/while/break/def)](#流程控制(if/for/while/break/def))
+- [切換時容易混亂的小提醒](#切換時容易混亂的小提醒)
+  - [和Javascript有點不一樣又好用的地方](#和Javascript有點不一樣又好用的地方)
+  - [轉換語言時很容易想剁手的地方](#轉換語言時很容易想剁手的地方)
+  - [還是Javasciprt感覺比較方便的地方](#還是Javasciprt感覺比較方便的地方)
+- [Python語法的重點整理](#Python語法的重點整理)
+  - [主要的型態](#主要的型態)
+  - [型態取得與轉換](#型態取得與轉換)
+  - [變數](#變數)
+    - [基本篇](#基本篇)
+    - [全域變數 與 區域變數](#全域變數-與-區域變數)
+    - [Call by value, refernce, sharing, or ??](#Call by value, refernce, sharing, or ??)
+  - [運算子](#運算子)
+  - [排序](#排序)
+  - [錯誤處理](#錯誤處理)
+  - [重要又不重要的系統功能](#重要又不重要的系統功能)
+  - [流程控制(if/for/while/break/def)](#流程控制(if/for/while/break/def))
+    - [if-else](#if-else)
+    - [For迴圈](#For迴圈)
+    - [While迴圈](#While迴圈)
+    - [Def (也就是function啦)](#Def-(也就是function啦))
 
-
-## Type、Variable、Operator、型態轉換
-### 特性 ／方法
+## 切換時容易混亂的小提醒
+### 轉換語言時很容易想剁手的地方
+  - 千萬記得縮排縮排縮排！！！！
+  - 是 `elif` 不是 `else if`！！！
+  - if a==b 的等號只有兩個！
+  - dictionary只有 `物件['key']`的用法，沒有 `物件.key`的用法
+  - array 是 `for in ` 「in in in in in in」！！！唸一百變！Python沒有 `for of`這個東東！
+  
+### 和Javascript有點不一樣又好用的地方
 - 切割取出： 
-  使用`[起點:終點]`語法，適用於string或array，注意終點沒有被包含
-  支援反向呼叫、支援取數值`[開始,結束,間隔]`或`[開始:]` 或`[:結束]`
+  - 使用`[開始:結束]` 或 `[開始:]` 或 `[:結束]` 語法，支援反向呼叫
+  - 適用於string或array
+  - 注意終點沒有被包含
 ```python
 name = 'Euli'
 names = ['Euli','Tim','Adam','Kelvin']
@@ -26,11 +46,50 @@ print(names[0:2]) #output: ['Euli','Tim']
 ```python
 name = 'Eulisha'
 names = ['Euli','Tim','Adam']
+assignment = {sqs:'Euli',rds:'Tim',dynamodb: 'Adam'}
 print('Euli' in name) #output: True
 print('Euli' in names) #output: True
+print('sqs' in assignment) #output: True
 ```
-- 長度： `len()`，適用於string或array
+- Exception有定義好各種類型可以直接用
+```python
+try:
+  #執行內容
+except (RuntimeError, TypeError, NameError):
+  pass
+except RuntimeError:
+  print('system err')
 
+```
+  
+### 還是Javasciprt感覺比較方便的地方
+  - 取dict內容時，`字典名.items / keys / values()` 的方法不能直接取出內容來使用，需要另外跑迴圈
+  ```python
+  assignment = {'sqs':'Euli','rds':'Tim','dynamodb': 'Adam'}
+  
+  # 不能直接取！會噴object is not subscriptable！
+  print(thisdict.values()[0])
+  
+  # 要像這樣自己跑迴圈轉乘可以用的array才行
+  assignment_array = []
+    for value in assignment.values(): 
+    assignment_array.append(value)
+  print(assignment_array)
+  ```
+
+  - 沒有ES6方便的解構賦值法
+  ```python
+  # 不能這樣用！會跳錯cannot assign to set display！
+  assignment = {'sqs':'Euli','rds':'Tim','dynamodb': 'Adam'}
+  {sqs, rds} = assignment 
+  ```
+
+[Python語法的重點整理](#Python語法的重點整理)
+- [主要的型態](#主要的型態)
+- [型態取得與轉換](#型態取得與轉換)
+************
+以下開始是細節: 
+## Python語法的重點整理
 ### 主要的型態
   - Number 數字: `int` 整數、 `float` 小數
   - String 字串: `str` 
@@ -48,6 +107,7 @@ print('Euli' in names) #output: True
     ```
     - 跳脫字元: `\` 例如`'I\'m student'`
     - 組合：`字串+字串`
+    - 長度： `len()`，適用於string或array
     - 格式化字串：
     1. `%`方式
         將指定格式之變數插入字串之中 %方式 `“字串 %s/d/f 字串”%(變數1,變數2)` 
@@ -62,7 +122,7 @@ print('Euli' in names) #output: True
       print(intro.format(hobbit, name, job))
       ```
     3. f-String 方式
-      `f”字串{變數/函式名}字串”` #python在判斷時會向上搜尋對應的變數
+      `f”字串{變數/函式名}字串”`
     #### 其他string方法
     - 清除空格 `字串.strip()`
     - 取代: `字串.replace('字串','字串')`
@@ -79,34 +139,49 @@ print('Euli' in names) #output: True
     - 大小寫轉換
       - 大寫: `字串.upper()` 
       - 小寫: `字串.lower()` 
+      
   - Boolean 布林: `bool`
     值為大寫的`True`或`False`，`
     Falsy value有：`0`、`None`、`''`、`()`、`[]`、`{}`
+    
   - List 清單: `清單名 = [物件1, 物件2]`
     - 呼叫：`清單名[索引][二階索引]`
-    - `list名稱.append(物件)`: 增加物件在最後一格, 若為物件組合彙整組放進去
-    - `list名稱.insert(index,物件)`: 將增加物件加在指定index之前，這個方法只能放單一物件
-    - `list名稱.pop()` #刪除最後一格
-    - `list名稱.exend(物件組合)`: 將物件組合中的物件一一拿出來並放入指定list
-    - 可以直接對一個區間的物件作修改
+    - 長度： `len()`，適用於string或array
+    - 新增物件：增加物件在最後 `list名稱.append(物件)`
+    - 新增物件於指定位置：將增加物件加在指定index之前 `list名稱.insert(index,物件)`
+    - 新增物件組：將物件組加在最後 `list名稱.exend(物件組)`，也可以加入tuple
+    - 刪除指定物件： `list名稱.remove(物件)`
+    - 刪除指定index： `list名稱.pop(index)` 如果沒有指定index則會刪除最後一個
+    - 刪除大絕：`del list名稱[index]` 如果沒有指定index則會刪除整個array
+    - 刪除所有物件：`list名稱.clear()`
   - Dict字典: `字典名 = {key1:value1, key2:value2}`
-    #數字/字串/turple都可以做key #不可相加 #若key重複後面會取代前面
-    呼叫： `dic名稱[”key名稱”]`
-    新增：`字典名[key名]=內容`  
-    合併：`字典1.update(字典2)`
-    `dic名稱.items()` 、`dic名稱.keys()`、`dic名稱.values()` #把dic變成包含key,value的list回傳
-    `for key, vlaue in dic名稱.item/keys/values()` #透過for可以將key和value呼叫出來
-    `dic名稱[”key名稱”]=值` #更新字典內物件的值
-    `dic名稱[”新key名稱”]=值` #新增物件至字典最後
+    - 呼叫： `字典名["key名稱"]`
+    - 新增或更新值：`字典名[key名]=值`  
+    - 新增或更新物件：`字典1.update(字典2)`
+    - 刪除：`字典名.pop("key名")`
+    - 刪除最後一個：`字典名.popitem("key")`
+    - 刪除大絕： `del 字典名["key名"]` 如果沒有指定key則會刪除整個
+    - 刪除所有物件：`字典名.clear()`
+    - 取dict內容: `dic名稱.items()` 、`dic名稱.keys()`、`dic名稱.values()` ，注意需要跑loop才能取出來
   - Tuple 元組: 序列、不可更變 `(物件,物件)` #從def回傳多個值時為tuple型態
-    - 取得型態: `type(變數)`
-    - 型態轉換: `float(3)`、`int(5.0)`、`str(3)`
-    - 指定型態casting: 如果有需要指定變數的型別，可以透過以下方法來指定`x=int(1)`
   - Set: 非序列、不可更變、不允許重複
+  #### 型態取得與轉換
+  - 取得型態: `type(變數)`
+  - 型態轉換: `float(3)`、`int(5.0)`、`str(3)`
+  - 指定型態casting: 如果有需要指定變數的型別，可以透過以下方法來指定`x=int(1)`
+
+變數
+- 基本篇
+- 全域變數 與 區域變數
+- Call by value, refernce, sharing, or ??
+運算子
+排序
+錯誤處理
+重要又不重要的系統功能
 
 ### 變數
 #### 基本篇
-  - 在Python當中，不需要做變數宣告，直接建立變數即可
+  - 在Python的世界，不需要做變數宣告、也不需要宣告變數是否可以變更，總之直接建立即可
   ```python
   x = 5
   y = 'Euli'
@@ -146,7 +221,7 @@ print('Euli' in names) #output: True
   x, y, z = fruits
   ```
 #### 全域變數 與 區域變數
-- 在python，只要是宣告在非function之外的變數都是全域變數，function裡面可以取用、也可以對他進行覆值。不過在function裡面對全域變數的改動，僅限於function內，不會更動到全域的值。
+- 在python，只要是宣告在非function之外的變數就是全域變數，function裡面可以取用、也可以對他進行覆值。不過在function裡面對全域變數的改動，僅限於function內，不會更動到全域的值。
 ```python
 king = 'kelvin'
 
@@ -168,6 +243,21 @@ def change_king(new_king):
 change_king('claudia')
 print(king) #output: claudia
 ```
+#### Call by value, refernce, sharing, or ??
+
+- 拷貝物件
+  python簡單複製物件的方式有以下，但都只會淺拷貝，若要深拷貝需要使用套件
+  ```
+  b = list(a)
+  b = a[:]
+  b = a.copy()
+  ```
+- 記憶體指派
+  - 對於不可變物件(Imutable Object)如數字、字串，每次都會當然每次指派都會是新的。
+  - 可變物件 (Mutable Object)如list、dictionary，傳遞的是物件的參照(記憶體位址)，所以物件裡面的內容是可以改變的
+  - 但如果對可變物件重新賦值，那就會獲得新的參照，新舊物件會變成不同的物件。
+  不錯的文章可以參考：
+  [Python 是 Pass By Value, Pass by Reference, 還是 Pass by Sharing？](https://medium.com/starbugs/python-%E4%B8%80%E6%AC%A1%E6%90%9E%E6%87%82-pass-by-value-pass-by-reference-%E8%88%87-pass-by-sharing-1873a2c6ac46)
 
 ### 運算子
 - 普通的四則： `+`、`-`、`*`、`/`、`%`、`**` 次方、`//` 無條件捨去
@@ -182,16 +272,26 @@ print(king) #output: claudia
 `清單.sort(reverse = True/False, key=指定排序方式)` #常配合`operator`使用
 `sorted(清單)` #其餘用法同sort
 
-### 處理異常語法
-try語法
-`try:`
-`執行內容`
-`except 異常名稱:`
-`執行內容`
+### 錯誤處理
+- 接錯誤: `try.. except..`，python有區分各種類型的exception可以協助判斷
+```python
+try:
+  #執行內容
+except 錯誤種類:
+  pass #跳過
+except (錯誤種類1,錯誤種類2):
+  #處理方式
+else:
+  #沒有錯誤發生
+finally:
+  #都結束時
+```
+- 拋錯誤
+```python
+raise Exception('內容')
+```
 
-#常用異常名稱: `ValueError` (傳入無效的參數)
-
-### 系統功能
+### 重要又不重要的系統功能
   - 輸出: `print(物件,物件)` #物件間預設一個空白間隔、print後預設一個空行
     `print(物件,物件,end=”string”)`  #將預設的空行改為指定
     `print(物件*次數)` #將物件輸出數次，支援string/list/tuple
@@ -205,52 +305,80 @@ try語法
     - `\` 程式碼換行
     - `\”` `\’` 已定義之符號要使用在字串時需加入\
 
-anaconda安裝模組位置: C:\Users\user\anaconda3\Lib\site-packages
 
-### Error 釋義
-unhashable 非不可變得值
-unsubscriptable: 非可以索引的(被下標)
 
-定義：
-def return多個值，可以用x,y=a(x,y)直接承接
-for可以有多個變數,但只能提取list/dic ex. for x,y in [[1,2],[3,4]]
-for 可以提turple(def回傳的值), 再用x[0]來把值提出來
-如果def沒有return值，則會回傳None
+## 流程控制(if/for/while/def)
+### if-else
+- 標準寫法：`if elif else`
+```python
+if left==target:
+  mid+1 = left
+elif right==target:
+  mid-1 = right
+else:
+  return mid
+```
+- 再複習一下符號
+  - 比較符號：`==`、`!=`、`>`、`<'、`>=`、`<=`
+  - 邏輯符號：`and`、`or`、`not`、 `is`、`is not` 
 
-### 流程控制(if/for/while/break/def)
-If語法  #搭配的條件判斷有： `and` `or` `not` `==` `!=` `>` `<` `>=` `<=`
-`if 條件1:`
-`指令1`
-`elif 條件2:`
-`指令2`
-`else 條件3:`
-`指令3`
+- 寫成一句：
+  - `if 條件: 執行1`
+  - `執行1 if 條件 else 執行2 `
+  ```python
+  if a > b: print('a bigger')
+  print('a bigger') if a > b else print('b bigger')
+  ```
+- 判斷是否包含： `if 值 in 物件:`
 
-#判斷式成立後即會停止
-`if 值 in 物件:` #可以判斷一個值是否有在物件中
+### For迴圈 
+- `for 變數 in 物件組合:` 或 `for 變數 in range(開始,結束,間距):`
+- 中斷時用 `break`、`continue`、`pass`
+```python
+names = ['Euli', 'Tim', 'Adam', 'Kelvin']
+for name in names:
+  print(name)
+for num in range(1,7,2):   #只能是數字，若直接輸入一數則預設為0~n-1
+  print(num) #1,3,5
+for i in range(len(names)):
+  print(names[i])
+  if i == 2:
+    break
+```
 
-Def語法
-`Def 函式名稱(傳入值1,傳入值2):`
-`定義內容`
-`return 回傳值1,回傳值2,回傳值3`
-`接回傳值變數1, 接回傳值變數2, 接回傳值變數3=函式名稱(傳入值1,傳入值2)`
-
-函式名稱
-#def是獨立的子程式，和外面的主程式使用之變數互不相通，故需要使用return來傳遞
-#執行def時需將要求之值或變數傳入子程式
-#子程式執行完成後，用return將指定的值依序傳出來 
-**傳出的值/變數與傳入不相關，數量和名稱都不用相同
-**傳出的值需要主程式有變數來接，可以一次用多個變數來相等
-可以將函式傳入函式，用 `函式名(函式名)`，被傳入的函式不需要加上()
-For迴圈  #可使用string/list/dic(提出key)
-`for 變數 in 物件組合:`
-`指令`
-`for 變數 in range(開始,結束,間距):`   #只能是數字，若直接輸入一數則預設為0~n-1
-`指令`
-#提取出的變數，不一定要和指令相關，可當成重複物件次來用
-#變數可以有多個
-
-While語法
-`while 判斷式:`
-`執行內容`
-停止遞迴：可以用`break`: 完全終止遞迴 或 `continue`: 終止此圈重下一圈開始
+### While迴圈
+- `while:`
+- 中斷時用 `break`、`continue`、`pass`
+```python
+while a < 5:
+  print(a)
+```
+### Def (也就是function啦)
+- `Def 函式名稱(傳入值): return`
+```python
+def binary_search(target):
+  # algorithm
+binary_search(target)
+```
+- return 可以多個值，外面也可以直接接多個值
+```python
+def group_member():
+  return 'Euli', 'Tim'
+student1, student2 = group_member()
+```
+- 可以偷用 `*` 如果不知道有幾個參數
+```python
+def seminar(*students):
+  for student in students:
+    print(student)
+seminar('Euli','Tim','Adam')
+```
+- key-value方式傳參數： `def名(key1=value1,key2=value2)`
+- 而且可以用`**`如果不知道有幾個
+```python
+def seminar(**student):
+    print(student['Euli'])
+seminar(stu1 = 'Euli',stu2 = 'Tim',stu3 = 'Adam')
+```
+- 也可以用default vlaue: `def 名稱(變數 = 值)`
+- 可以將def傳入def：`def名(def名)`

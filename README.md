@@ -1,10 +1,10 @@
 # Python-Basic
-本文是給從Javascript想快速入門Python用的介紹
+本文是給從Javascript想快速入門Python用的不專業重點整理與分享，若有錯誤之處還請不吝指教
 
 ## Table of Content
 - [切換時容易混亂的小提醒](#切換時容易混亂的小提醒)
-  - [和Javascript有點不一樣又好用的地方](#和Javascript有點不一樣又好用的地方)
   - [轉換語言時很容易想剁手的地方](#轉換語言時很容易想剁手的地方)
+  - [和Javascript有點不一樣而且好用的地方](#和Javascript有點不一樣而且好用的地方)
   - [還是Javasciprt感覺比較方便的地方](#還是Javasciprt感覺比較方便的地方)
 - [Python語法的重點整理](#Python語法的重點整理)
   - [主要的型態](#主要的型態)
@@ -17,11 +17,11 @@
   - [排序](#排序)
   - [錯誤處理](#錯誤處理)
   - [重要又不重要的系統功能](#重要又不重要的系統功能)
-  - [流程控制(if/for/while/break/def)](#流程控制(if/for/while/break/def))
+  - [流程控制](#流程控制)
     - [if-else](#if-else)
     - [For迴圈](#For迴圈)
     - [While迴圈](#While迴圈)
-    - [Def (也就是function啦)](#Def-(也就是function啦))
+    - [Def(也就是function啦)](#Def-(也就是function啦))
 
 ## 切換時容易混亂的小提醒
 ### 轉換語言時很容易想剁手的地方
@@ -31,7 +31,7 @@
   - dictionary只有 `物件['key']`的用法，沒有 `物件.key`的用法
   - array 是 `for in ` 「in in in in in in」！！！唸一百變！Python沒有 `for of`這個東東！
   
-### 和Javascript有點不一樣又好用的地方
+### 和Javascript有點不一樣而且好用的地方
 - 切割取出： 
   - 使用`[開始:結束]` 或 `[開始:]` 或 `[:結束]` 語法，支援反向呼叫
   - 適用於string或array
@@ -307,7 +307,7 @@ raise Exception('內容')
 
 
 
-## 流程控制(if/for/while/def)
+## 流程控制
 ### if-else
 - 標準寫法：`if elif else`
 ```python
@@ -353,7 +353,7 @@ for i in range(len(names)):
 while a < 5:
   print(a)
 ```
-### Def (也就是function啦)
+### Def(也就是function啦)
 - `Def 函式名稱(傳入值): return`
 ```python
 def binary_search(target):

@@ -143,7 +143,7 @@ except RuntimeError:
   - Boolean 布林: `bool`
     值為大寫的`True`或`False`，`
     Falsy value有：`0`、`None`、`''`、`()`、`[]`、`{}`
-    
+   
   - List 清單: `清單名 = [物件1, 物件2]`
     - 呼叫：`清單名[索引][二階索引]`
     - 長度： `len()`，適用於string或array
@@ -170,15 +170,7 @@ except RuntimeError:
   - 型態轉換: `float(3)`、`int(5.0)`、`str(3)`
   - 指定型態casting: 如果有需要指定變數的型別，可以透過以下方法來指定`x=int(1)`
 
-變數
-- 基本篇
-- 全域變數 與 區域變數
-- Call by value, refernce, sharing, or ??
-運算子
-排序
-錯誤處理
-重要又不重要的系統功能
-
+************
 ### 變數
 #### 基本篇
   - 在Python的世界，不需要做變數宣告、也不需要宣告變數是否可以變更，總之直接建立即可
@@ -259,6 +251,7 @@ print(king) #output: claudia
   不錯的文章可以參考：
   [Python 是 Pass By Value, Pass by Reference, 還是 Pass by Sharing？](https://medium.com/starbugs/python-%E4%B8%80%E6%AC%A1%E6%90%9E%E6%87%82-pass-by-value-pass-by-reference-%E8%88%87-pass-by-sharing-1873a2c6ac46)
 
+************
 ### 運算子
 - 普通的四則： `+`、`-`、`*`、`/`、`%`、`**` 次方、`//` 無條件捨去
   - 支援上面符號的簡化運算寫法：`x+=1`；但沒有`x++`
@@ -268,10 +261,12 @@ print(king) #output: claudia
 `len(物件)` #可以算出String/list/dic/turple長度
 `count(字串,開始,結束)`:從某個區間中計算某個字串出現的次
 
+************
 ### 排序
 `清單.sort(reverse = True/False, key=指定排序方式)` #常配合`operator`使用
 `sorted(清單)` #其餘用法同sort
 
+************
 ### 錯誤處理
 - 接錯誤: `try.. except..`，python有區分各種類型的exception可以協助判斷
 ```python
@@ -290,7 +285,7 @@ finally:
 ```python
 raise Exception('內容')
 ```
-
+************
 ### 重要又不重要的系統功能
   - 輸出: `print(物件,物件)` #物件間預設一個空白間隔、print後預設一個空行
     `print(物件,物件,end=”string”)`  #將預設的空行改為指定
@@ -306,7 +301,7 @@ raise Exception('內容')
     - `\”` `\’` 已定義之符號要使用在字串時需加入\
 
 
-
+************
 ## 流程控制
 ### if-else
 - 標準寫法：`if elif else`
